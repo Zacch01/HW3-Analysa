@@ -32,7 +32,6 @@ def printIntoFile(data, message, isTrue, final=None):
 
         # In case the Linear Equation is valid
         if isTrue:
-
             # Saving the Linear Equation input, and the updated one
             if MATRIX_COUNT < 0:
                 file.write(str(message) + '\n')
@@ -291,6 +290,7 @@ def organizeMatrix(originMatrix, originVectorB):
 
     # Return the updated Linear Equation
     return originMatrix, originVectorB
+
 
 def isDiagonalDominant(matrix):
     """
