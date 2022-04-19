@@ -291,3 +291,81 @@ def organizeMatrix(originMatrix, originVectorB):
 
     # Return the updated Linear Equation
     return originMatrix, originVectorB
+
+def isDiagonalDominant(matrix):
+    """
+    Check if the pivot in every row is bigger than the sum of the whole row (without the pivot),
+    If yes return True, else False
+
+    """
+    for i in range(len(matrix)):
+        # Variable to store, the summation of absolute row [i]
+        rowSum = 0
+        for j in range(len(matrix)):
+            if i != j:
+                rowSum = rowSum + abs(matrix[i][j])
+
+        # If the summation of the row is bigger than the pivot, return False (The matrix is not diagonal dominant)
+        if rowSum > abs(matrix[i][i]):
+            return False
+
+    # The matrix is Diagonal Dominant
+    return True
+
+
+def initMatrix():
+    """
+    Initialize user Linear Equations, and return them
+
+    :return: NxN matrix, and Nx1 vector B
+    """
+    # Initialize Linear Equation from the user
+    matrix = [[4, 2, 0], [2, 10, 4], [0, 4, 5]]
+    vectorB = [[2], [6], [5]]
+
+    # Return the user linear equation
+    return matrix, vectorB
+
+
+def determinantMatrix(matrix):
+    """
+    Calculate the matrix determinant and return the result
+
+    :param matrix: NxN Matrix
+    :return: Matrix determinant
+    """
+    # Simple case, The matrix size is 2x2
+    if len(matrix) == 2:
+        value = matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1]
+        return value
+
+    # Initialize our sum variable
+    determinantSum = 0
+
+    # Loop to traverse each column of the matrix
+    for current_column in range(len(matrix)):
+        sign = (-1) ** current_column
+
+        # Calling the function recursively to get determinant value of sub matrix obtained
+        determinant_sub = determinantMatrix(
+            [row[: current_column] + row[current_column + 1:] for row in (matrix[: 0] + matrix[0 + 1:])])
+
+        # Adding the calculated determinant value of particular column matrix to total the determinantSum
+        determinantSum = determinantSum + (sign * matrix[0][current_column] * determinant_sub)
+
+    # Returning the final Sum
+    return determinantSum
+
+
+print("[Please Select Method]\n'1' Jacobi\n'2' Gauss Seidel\nDefault is Jacobi Method")
+userChoice = int(input("Input --> "))
+
+if userChoice == 1:
+    JacobiMethod()
+elif userChoice == 2:
+    GaussSeidelMethod()
+else:
+    print('Jacobi\n')
+    JacobiMethod()
+
+print('Your Method Calculation Is Located In this File Folder')
