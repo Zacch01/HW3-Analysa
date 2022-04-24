@@ -1,7 +1,5 @@
 # Author : Nitzan Tomer & Zaccharie Attias & Sharon Angdo
 
-# Used Libraries
-import math
 
 # Global Variable [Only Used To print the iteration number]
 MATRIX_COUNT = -2
@@ -136,7 +134,7 @@ def GaussSeidelMethod():
                 Counter = Counter + 1
 
             # Saving the Linear Equation final solution
-            currentIteration = [[format(currentIteration[row][0], '.' + str(int(-math.log10(EPSILON))) + 'f') for _ in range(len(currentIteration[0]))] for row in range(len(currentIteration))]
+            currentIteration =[[(int(currentIteration[0][0]*10**5))/10**5], [(int(currentIteration[1][0]*10**5))/10**5], [(int(currentIteration[2][0]*10**5))/10**5]]
             printIntoFile(currentIteration, None, True, True)
 
         # According message In case there is more or less than one solution
@@ -208,7 +206,7 @@ def JacobiMethod():
                 Counter = Counter + 1
 
             # Saving the Linear Equation final solution
-            currentIteration = [[format(currentIteration[row][0], '.' + str(int(-math.log10(EPSILON))) + 'f') for _ in range(len(currentIteration[0]))] for row in range(len(currentIteration))]
+            currentIteration =[[(int(currentIteration[0][0]*10**5))/10**5], [(int(currentIteration[1][0]*10**5))/10**5], [(int(currentIteration[2][0]*10**5))/10**5]]
             printIntoFile(currentIteration, None, True, True)
 
         # According message In case there is more or less than one solution
@@ -358,11 +356,11 @@ def determinantMatrix(matrix):
 
 
 print("[Please Select Method]\n'1' Jacobi\n'2' Gauss Seidel\nDefault is Jacobi Method")
-userChoice = int(input("Input --> "))
+userChoice = input("Input --> ")
 
-if userChoice == 1:
+if userChoice == "1":
     JacobiMethod()
-elif userChoice == 2:
+elif userChoice == "2":
     GaussSeidelMethod()
 else:
     print('Jacobi\n')
